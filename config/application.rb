@@ -17,5 +17,15 @@ module ExcelDiff
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.react.server_renderer_pool_size  ||= 1
+    config.react.server_renderer_timeout    ||= 20
+    config.react.server_renderer = React::ServerRendering::BundleRenderer
+    config.react.server_renderer_options = {
+      files: ["server_rendering.js"],
+      replay_console: true,
+    }
+    config.react.server_renderer_extensions = ["jsx", "js"]
+    config.react.server_renderer_directories = ["/app/assets/javascripts", "/app/javascripts"]
   end
 end
